@@ -296,7 +296,9 @@ local function TransformOrgan(source)
 
             if poochQuantity > 35 then
                 TriggerClientEvent('esx:showNotification', source, _U('too_many_pouches'))
-            elseif osQuantity == 206 and cerveauQuantity == 1 and coeurQuantity == 1 and moelleQuantity == 40 and intestinQuantity == 11 then
+            elseif osQuantity and cerveauQuantity and coeurQuantity and moelleQuantity and intestinQuantity < 1 then
+            	TriggerClientEvent('esx:showNotification', source, _U('not_enough_organ'))
+            else
                 xPlayer.removeInventoryItem('os', 206)
                 xPlayer.removeInventoryItem('cerveau', 1)
                 xPlayer.removeInventoryItem('coeur', 1)
@@ -306,8 +308,6 @@ local function TransformOrgan(source)
                 xPlayer.addInventoryItem('organ_pooch', 1)
             
                 TransformOrgan(source)
-            else
-                TriggerClientEvent('esx:showNotification', source, _U('not_enough_organ'))
             end
         end
     end)
